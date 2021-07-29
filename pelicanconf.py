@@ -38,7 +38,7 @@ DISQUS_SITENAME = 'sipitech'
 
 PLUGIN_PATHS = ["../pelican-plugins"]
 #PLUGINS = ['sitemap', 'extract_toc', 'tipue_search', 'liquid_tags.img', 'neighbors', 'latex', 'related_posts', 'assets', 'share_post', 'multi_part']
-PLUGINS = ['sitemap', 'extract_toc', 'tipue_search', 'liquid_tags.img', 'neighbors', 'related_posts']
+PLUGINS = ['sitemap', 'extract_toc', 'tipue_search', 'liquid_tags.img', 'neighbors', 'related_posts', 'render_math']
 #MD_EXTENSIONS = ['codehilite(css_class=highlight,linenums=True)', 'extra', 'headerid', 'toc(permalink=true)', 'fenced_code', ]
 
 SITEMAP = {
@@ -57,6 +57,6 @@ SITEMAP = {
 
 
 # Appearance
-THEME = '../theme/elegant'
+THEME = 'theme/elegant'
 TYPOGRIFY = True
 DEFAULT_PAGINATION = False

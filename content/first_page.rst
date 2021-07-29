@@ -12,3 +12,14 @@
 开篇第一个文章
 
 采用pelican写作，发布在gitpage上。
+
+
+测试一下公式
+=============
+用的是render_math插件
+
+The area of a circle is :math:`A_\text{c} = (\pi/4) d^2`.
+
+.. math::
+
+  α_t(i) = P(O_1, O_2, … O_t, q_t = S_i λ)
