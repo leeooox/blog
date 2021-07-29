@@ -35,10 +35,13 @@ SOCIAL = (('You can add links in your config file', '#'),
 
 
 DISQUS_SITENAME = 'sipitech'
+CODE_DIR = 'code'
+STATIC_PATHS =['images','code']
 
 PLUGIN_PATHS = ["../pelican-plugins"]
 #PLUGINS = ['sitemap', 'extract_toc', 'tipue_search', 'liquid_tags.img', 'neighbors', 'latex', 'related_posts', 'assets', 'share_post', 'multi_part']
-PLUGINS = ['sitemap', 'extract_toc', 'tipue_search', 'liquid_tags.img', 'neighbors', 'related_posts', 'render_math']
+PLUGINS = ['sitemap', 'extract_toc', 'tipue_search', 'liquid_tags.img','liquid_tags.include_code', 
+            'section_number','neighbors', 'related_posts', 'render_math','code_include']
 #MD_EXTENSIONS = ['codehilite(css_class=highlight,linenums=True)', 'extra', 'headerid', 'toc(permalink=true)', 'fenced_code', ]
 
 SITEMAP = {
@@ -55,7 +58,7 @@ SITEMAP = {
      }
 }
 
-MATH_JAX = {'source': "'http://mathjax.josephjctang.com/MathJax.js?config=TeX-MML-AM_HTMLorMML'"}
+MATH_JAX = {'source': "'https://mathjax.josephjctang.com/MathJax.js?config=TeX-MML-AM_HTMLorMML'"}
 
 # Appearance
 THEME = 'theme/elegant'
