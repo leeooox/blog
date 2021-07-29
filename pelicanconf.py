@@ -4,12 +4,14 @@
 AUTHOR = 'Aaron Lee'
 SITENAME = 'SIPI Tech'
 #SITEURL = 'https://blog.sipi.tech'
+SITESUBTITLE = 'a blog for everything about tech'
+GITHUB_URL = 'https://github.com/leeooox'
 
 PATH = 'content'
 
 TIMEZONE = 'Asia/Shanghai'
-DATE_FORMATS = {'en': '%b %d, %Y'}
-DEFAULT_LANG = 'en'
+DATE_FORMATS = {'zh_cn': '%b %d, %Y'}
+DEFAULT_LANG = 'zh_cn'
 
 # Feed generation is usually not desired when developing
 FEED_ALL_ATOM = None
@@ -33,8 +35,12 @@ SOCIAL = (('You can add links in your config file', '#'),
 # Uncomment following line if you want document-relative URLs when developing
 #RELATIVE_URLS = True
 
+DEFAULT_DATE = 'fs'
+AUTHOR = 'Aaron Lee'
 
-DISQUS_SITENAME = 'sipitech'
+#DISQUS_SITENAME = 'sipitech'
+COMMENTBOX_PROJECT = '5726956779732992-proj'
+
 CODE_DIR = 'code'
 STATIC_PATHS =['images','code']
 
@@ -58,7 +64,9 @@ SITEMAP = {
      }
 }
 
-MATH_JAX = {'source': "'https://mathjax.josephjctang.com/MathJax.js?config=TeX-MML-AM_HTMLorMML'"}
+#MATH_JAX = {'source': "'https://mathjax.josephjctang.com/MathJax.js?config=TeX-MML-AM_HTMLorMML'"}
+MATH_JAX = {'source': "'https://cdn.bootcdn.net/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js'"}
+
 
 # Appearance
 THEME = 'theme/elegant'
