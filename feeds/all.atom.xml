@@ -1,16 +1,128 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>SIPI Tech</title><link href="https://blog.sipi.tech/" rel="alternate"></link><link href="https://blog.sipi.tech/feeds/all.atom.xml" rel="self"></link><id>https://blog.sipi.tech/</id><updated>2021-07-28T23:58:00+08:00</updated><entry><title>第一篇gitpages blog</title><link href="https://blog.sipi.tech/my-fist-post.html" rel="alternate"></link><published>2021-07-28T23:58:00+08:00</published><updated>2021-07-28T23:58:00+08:00</updated><author><name>Aaron LeeLee</name></author><id>tag:blog.sipi.tech,2021-07-28:/my-fist-post.html</id><summary type="html">&lt;p class="first last"&gt;Short version for index and&amp;nbsp;feeds&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>SIPI Tech</title><link href="https://blog.sipi.tech/" rel="alternate"></link><link href="https://blog.sipi.tech/feeds/all.atom.xml" rel="self"></link><id>https://blog.sipi.tech/</id><updated>2021-07-28T23:58:00+08:00</updated><entry><title>第一篇gitpages blog</title><link href="https://blog.sipi.tech/my-fist-post.html" rel="alternate"></link><published>2021-07-28T23:58:00+08:00</published><updated>2021-07-28T23:58:00+08:00</updated><author><name>Aaron Lee</name></author><id>tag:blog.sipi.tech,2021-07-28:/my-fist-post.html</id><summary type="html">&lt;p class="first last"&gt;Short version for index and&amp;nbsp;feeds&lt;/p&gt;
 </summary><content type="html">&lt;p&gt;开篇第一个文章&lt;/p&gt;
 &lt;p&gt;采用pelican写作，发布在gitpage上。&lt;/p&gt;
 &lt;div class="section" id="id1"&gt;
 &lt;h2&gt;测试一下公式&lt;/h2&gt;
-&lt;p&gt;用的是render_math插件&lt;/p&gt;
+&lt;p&gt;用的是render_math插件:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+The area of a circle is :math:`A_\text{c} = (\pi/4) d^2`.
+
+.. math::
+
+  α_t(i) = P(O_1, O_2, … O_t, q_t = S_i λ)
+&lt;/pre&gt;
 &lt;p&gt;The area of a circle is &lt;span class="math"&gt;\(A_\text{c} = (\pi/4) d^2\)&lt;/span&gt;.&lt;/p&gt;
 &lt;div class="math"&gt;
 \begin{equation*}
 \alpha _t(i) = P(O_1, O_2, \ldots  O_t, q_t = S_i \lambda )
 \end{equation*}
 &lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id2"&gt;
+&lt;h2&gt;测试代码&lt;/h2&gt;
+&lt;p&gt;使用code-block指令&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;assign&lt;/span&gt; &lt;span class="n"&gt;cDVE&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mh"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="n"&gt;status&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="n"&gt;S10&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;E4&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mh"&gt;3&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mh"&gt;1&lt;/span&gt;&lt;span class="mb"&gt;&amp;#39;b0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;E4&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mh"&gt;2&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mh"&gt;1&lt;/span&gt;&lt;span class="mb"&gt;&amp;#39;b1&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;&lt;span class="o"&gt;?&lt;/span&gt; &lt;span class="mh"&gt;1&lt;/span&gt;&lt;span class="mb"&gt;&amp;#39;b1&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="mh"&gt;1&lt;/span&gt;&lt;span class="mb"&gt;&amp;#39;b0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="k"&gt;assign&lt;/span&gt; &lt;span class="n"&gt;cDVE&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mh"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="n"&gt;status&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="n"&gt;S00&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;E4&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mh"&gt;3&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mh"&gt;1&lt;/span&gt;&lt;span class="mb"&gt;&amp;#39;b0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;E4&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mh"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mh"&gt;1&lt;/span&gt;&lt;span class="mb"&gt;&amp;#39;b1&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;&lt;span class="o"&gt;?&lt;/span&gt; &lt;span class="mh"&gt;1&lt;/span&gt;&lt;span class="mb"&gt;&amp;#39;b1&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="mh"&gt;1&lt;/span&gt;&lt;span class="mb"&gt;&amp;#39;b0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="k"&gt;assign&lt;/span&gt; &lt;span class="n"&gt;cDV&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mh"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;~&lt;/span&gt;&lt;span class="n"&gt;DVE&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mh"&gt;1&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;&lt;span class="c1"&gt;//~(DVE[0]^DVE[1]);&lt;/span&gt;
+&lt;span class="k"&gt;assign&lt;/span&gt; &lt;span class="n"&gt;cDV&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mh"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;DVE&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mh"&gt;0&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
+&lt;span class="c1"&gt;// end of combine logic&lt;/span&gt;
+
+&lt;span class="k"&gt;assign&lt;/span&gt; &lt;span class="n"&gt;data_valid&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;DV&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+&lt;span class="k"&gt;always&lt;/span&gt; &lt;span class="p"&gt;@(&lt;/span&gt;&lt;span class="k"&gt;posedge&lt;/span&gt; &lt;span class="n"&gt;clk_in&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;begin&lt;/span&gt;
+  &lt;span class="n"&gt;DVE&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;=&lt;/span&gt; &lt;span class="n"&gt;cDVE&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="n"&gt;DV&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;=&lt;/span&gt; &lt;span class="n"&gt;cDV&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;p&gt;使用include指令,高亮显示不是很好&lt;/p&gt;
+&lt;pre class="code verilog literal-block"&gt;
+&lt;span class="ln"&gt; 1 &lt;/span&gt;&lt;span class="k"&gt;module&lt;/span&gt; &lt;span class="n"&gt;top&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;input&lt;/span&gt; &lt;span class="n"&gt;clk&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;rst&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="k"&gt;output&lt;/span&gt; &lt;span class="kt"&gt;reg&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mh"&gt;7&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="mh"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="n"&gt;leds&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="ln"&gt; 2 &lt;/span&gt;
+&lt;span class="ln"&gt; 3 &lt;/span&gt;&lt;span class="kt"&gt;reg&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mh"&gt;7&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="mh"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="n"&gt;ctr&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="ln"&gt; 4 &lt;/span&gt;&lt;span class="k"&gt;always&lt;/span&gt; &lt;span class="p"&gt;&amp;#64;(&lt;/span&gt;&lt;span class="k"&gt;posedge&lt;/span&gt; &lt;span class="n"&gt;clk&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="ln"&gt; 5 &lt;/span&gt;        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;rst&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="ln"&gt; 6 &lt;/span&gt;                &lt;span class="n"&gt;ctr&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;=&lt;/span&gt; &lt;span class="mh"&gt;8'h00&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="ln"&gt; 7 &lt;/span&gt;        &lt;span class="k"&gt;else&lt;/span&gt;
+&lt;span class="ln"&gt; 8 &lt;/span&gt;                &lt;span class="n"&gt;ctr&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;=&lt;/span&gt; &lt;span class="n"&gt;ctr&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="mh"&gt;1&lt;/span&gt;&lt;span class="mb"&gt;'b1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="ln"&gt; 9 &lt;/span&gt;
+&lt;span class="ln"&gt;10 &lt;/span&gt;&lt;span class="k"&gt;assign&lt;/span&gt; &lt;span class="n"&gt;leds&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;ctr&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="ln"&gt;11 &lt;/span&gt;
+&lt;span class="ln"&gt;12 &lt;/span&gt;&lt;span class="k"&gt;endmodule&lt;/span&gt;
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div class="section" id="csv"&gt;
+&lt;h2&gt;csv表格测试&lt;/h2&gt;
+&lt;p&gt;直接写在正文的方法&lt;/p&gt;
+&lt;table border="1" class="colwidths-given docutils"&gt;
+&lt;caption&gt;直接写在正文的方法&lt;/caption&gt;
+&lt;colgroup&gt;
+&lt;col width="27%" /&gt;
+&lt;col width="18%" /&gt;
+&lt;col width="55%" /&gt;
+&lt;/colgroup&gt;
+&lt;thead valign="bottom"&gt;
+&lt;tr&gt;&lt;th class="head"&gt;Treat&lt;/th&gt;
+&lt;th class="head"&gt;Quantity&lt;/th&gt;
+&lt;th class="head"&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody valign="top"&gt;
+&lt;tr&gt;&lt;td&gt;Albatross&lt;/td&gt;
+&lt;td&gt;2.99&lt;/td&gt;
+&lt;td&gt;On a stick!&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Crunchy Frog&lt;/td&gt;
+&lt;td&gt;1.49&lt;/td&gt;
+&lt;td&gt;If we took the bones out, it wouldn&amp;#8217;t be
+crunchy, now would it?&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Gannet Ripple&lt;/td&gt;
+&lt;td&gt;1.99&lt;/td&gt;
+&lt;td&gt;On a stick!&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;换一种直接指定csv文件的方法，可以用excel编辑csv文件。&lt;/p&gt;
+&lt;table border="1" class="docutils"&gt;
+&lt;caption&gt;指定csv文件的方法&lt;/caption&gt;
+&lt;colgroup&gt;
+&lt;col width="33%" /&gt;
+&lt;col width="33%" /&gt;
+&lt;col width="33%" /&gt;
+&lt;/colgroup&gt;
+&lt;thead valign="bottom"&gt;
+&lt;tr&gt;&lt;th class="head"&gt;Treat&lt;/th&gt;
+&lt;th class="head"&gt;Quantity&lt;/th&gt;
+&lt;th class="head"&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody valign="top"&gt;
+&lt;tr&gt;&lt;td&gt;Albatross&lt;/td&gt;
+&lt;td&gt;2.99&lt;/td&gt;
+&lt;td&gt;On a stick!&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Crunchy Frog&lt;/td&gt;
+&lt;td&gt;1.49&lt;/td&gt;
+&lt;td&gt;If we took the bones out, it wouldn??t be crunchy, now would it?&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Gannet Ripple&lt;/td&gt;
+&lt;td&gt;1.99&lt;/td&gt;
+&lt;td&gt;On a stick!&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
 &lt;/div&gt;
 &lt;script type='text/javascript'&gt;if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
     var align = "center",
