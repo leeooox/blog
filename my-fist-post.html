@@ -33,8 +33,10 @@
 
 
 
+	<script src="https://cdn.bootcdn.net/ajax/libs/wavedrom/2.8.1/skins/default.js" type="text/javascript"></script>
+	<script src="https://cdn.bootcdn.net/ajax/libs/wavedrom/2.8.1/wavedrom.min.js" type="text/javascript"></script>
     </head>
-    <body>
+    <body onload="WaveDrom.ProcessAll()">
         <div id="content">
             <div class="navbar navbar-static-top">
                 <div class="navbar-inner">
@@ -82,7 +84,7 @@
             <p>开篇第一个文章</p>
 <p>采用pelican写作，发布在gitpage上。</p>
 <div class="section" id="id1">
-<h2>测试一下公式</h2>
+<h2>1. 测试一下公式</h2>
 <p>用的是render_math插件:</p>
 <pre class="literal-block">
 The area of a circle is :math:`A_\text{c} = (\pi/4) d^2`.
@@ -99,8 +101,9 @@ The area of a circle is :math:`A_\text{c} = (\pi/4) d^2`.
 </div>
 </div>
 <div class="section" id="id2">
-<h2>测试代码</h2>
-<p>使用code-block指令</p>
+<h2>2. 测试代码</h2>
+<div class="section" id="code-block">
+<h3>2.1. 使用code-block指令</h3>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -125,7 +128,9 @@ The area of a circle is :math:`A_\text{c} = (\pi/4) d^2`.
   <span class="n">DV</span> <span class="o">&lt;=</span> <span class="n">cDV</span><span class="p">;</span>
 <span class="k">end</span>
 </pre></div>
-</td></tr></table><p>使用include指令,高亮显示不是很好</p>
+</td></tr></table></div>
+<div class="section" id="include">
+<h3>2.2. 使用include指令,高亮显示不是很好</h3>
 <pre class="code verilog literal-block">
 <span class="ln"> 1 </span><span class="k">module</span> <span class="n">top</span><span class="p">(</span><span class="k">input</span> <span class="n">clk</span><span class="p">,</span> <span class="n">rst</span><span class="p">,</span> <span class="k">output</span> <span class="kt">reg</span> <span class="p">[</span><span class="mh">7</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">leds</span><span class="p">);</span>
 <span class="ln"> 2 </span>
@@ -141,9 +146,27 @@ The area of a circle is :math:`A_\text{c} = (\pi/4) d^2`.
 <span class="ln">12 </span><span class="k">endmodule</span>
 </pre>
 </div>
+<div class="section" id="code-include">
+<h3>2.3. 使用code_include插件，没办法使能行号</h3>
+<div class="highlight"><pre><span></span><span class="k">module</span> <span class="n">top</span><span class="p">(</span><span class="k">input</span> <span class="n">clk</span><span class="p">,</span> <span class="n">rst</span><span class="p">,</span> <span class="k">output</span> <span class="kt">reg</span> <span class="p">[</span><span class="mh">7</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">leds</span><span class="p">);</span>
+
+<span class="kt">reg</span> <span class="p">[</span><span class="mh">7</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span> <span class="n">ctr</span><span class="p">;</span>
+<span class="k">always</span> <span class="p">@(</span><span class="k">posedge</span> <span class="n">clk</span><span class="p">)</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">rst</span><span class="p">)</span>
+        <span class="n">ctr</span> <span class="o">&lt;=</span> <span class="mh">8&#39;h00</span><span class="p">;</span>
+    <span class="k">else</span>
+        <span class="n">ctr</span> <span class="o">&lt;=</span> <span class="n">ctr</span> <span class="o">+</span> <span class="mh">1</span><span class="mb">&#39;b1</span><span class="p">;</span>
+
+<span class="k">assign</span> <span class="n">leds</span> <span class="o">=</span> <span class="n">ctr</span><span class="p">;</span>
+
+<span class="k">endmodule</span>
+</pre></div>
+</div>
+</div>
 <div class="section" id="csv">
-<h2>csv表格测试</h2>
-<p>直接写在正文的方法</p>
+<h2>3. csv表格测试</h2>
+<div class="section" id="id3">
+<h3>3.1. 直接写在正文的方法</h3>
 <table border="1" class="colwidths-given docutils">
 <caption>直接写在正文的方法</caption>
 <colgroup>
@@ -173,7 +196,9 @@ crunchy, now would it?</td>
 </tr>
 </tbody>
 </table>
-<p>换一种直接指定csv文件的方法，可以用excel编辑csv文件。</p>
+</div>
+<div class="section" id="csv-excelcsv">
+<h3>3.2. 换一种直接指定csv文件的方法，可以用excel编辑csv文件。</h3>
 <table border="1" class="docutils">
 <caption>指定csv文件的方法</caption>
 <colgroup>
@@ -203,6 +228,16 @@ crunchy, now would it?</td>
 </tbody>
 </table>
 </div>
+</div>
+<div class="section" id="wavedrom">
+<h2>4. 使用wavedrom增加时序图</h2>
+<script type="WaveDrom">
+{ signal : [
+  { name: "clk",  wave: "p......" },
+  { name: "bus",  wave: "x.34.5x",   data: "head body tail" },
+  { name: "wire", wave: "0.1..0." },
+]}
+</script></div>
 <script type='text/javascript'>if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
     var align = "center",
         indent = "0em",
@@ -442,8 +477,8 @@ crunchy, now would it?</td>
         Powered by: <a href="http://getpelican.com/" title="Pelican Home Page" target="_blank" rel="nofollow noopener noreferrer">Pelican</a>
         Theme: <a href="https://elegant.oncrashreboot.com/" title="Theme Elegant Home Page" target="_blank" rel="nofollow noopener noreferrer">Elegant</a>
     </div>
-</footer>            <script src="//code.jquery.com/jquery.min.js"></script>
-        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+</footer>            <script src="//cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="//cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.0.2/js/bootstrap.min.js"></script>
         <script src="https://blog.sipi.tech/theme/js/elegant.prod.9e9d5ce754.js"></script>
         <script>
             function validateForm(query)
