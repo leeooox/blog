@@ -5,6 +5,7 @@
 :category: misc
 :slug: my-fist-post
 :summary: Short version for index and feeds
+:comment_id: my-fist-post
 
 开篇第一个文章
 

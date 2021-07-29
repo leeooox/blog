@@ -38,6 +38,7 @@ SOCIAL = (('You can add links in your config file', '#'),
 DEFAULT_DATE = 'fs'
 AUTHOR = 'Aaron Lee'
 
+
 #DISQUS_SITENAME = 'sipitech'
 COMMENTBOX_PROJECT = '5726956779732992-proj'
 
