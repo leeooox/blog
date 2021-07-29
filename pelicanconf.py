@@ -55,6 +55,7 @@ SITEMAP = {
      }
 }
 
+MATH_JAX = {'source': "'http://mathjax.josephjctang.com/MathJax.js?config=TeX-MML-AM_HTMLorMML'"}
 
 # Appearance
 THEME = 'theme/elegant'
