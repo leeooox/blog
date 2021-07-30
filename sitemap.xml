@@ -5,99 +5,63 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://blog.sipi.tech/</loc>
-<<<<<<< HEAD
-<lastmod>2021-07-30T09:30:04-00:00</lastmod>
-=======
-<lastmod>2021-07-29T22:30:30-00:00</lastmod>
->>>>>>> d68a38c789b0ae87cd264c63a0fc5bd1480621c6
+<lastmod>2021-07-30T09:32:44-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://blog.sipi.tech/tags.html</loc>
-<<<<<<< HEAD
-<lastmod>2021-07-30T09:30:04-00:00</lastmod>
-=======
-<lastmod>2021-07-29T22:30:30-00:00</lastmod>
->>>>>>> d68a38c789b0ae87cd264c63a0fc5bd1480621c6
+<lastmod>2021-07-30T09:32:44-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://blog.sipi.tech/categories.html</loc>
-<<<<<<< HEAD
-<lastmod>2021-07-30T09:30:04-00:00</lastmod>
-=======
-<lastmod>2021-07-29T22:30:30-00:00</lastmod>
->>>>>>> d68a38c789b0ae87cd264c63a0fc5bd1480621c6
+<lastmod>2021-07-30T09:32:44-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://blog.sipi.tech/authors.html</loc>
-<<<<<<< HEAD
-<lastmod>2021-07-30T09:30:04-00:00</lastmod>
-=======
-<lastmod>2021-07-29T22:30:30-00:00</lastmod>
->>>>>>> d68a38c789b0ae87cd264c63a0fc5bd1480621c6
+<lastmod>2021-07-30T09:32:44-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://blog.sipi.tech/archives.html</loc>
-<<<<<<< HEAD
-<lastmod>2021-07-30T09:30:04-00:00</lastmod>
-=======
-<lastmod>2021-07-29T22:30:30-00:00</lastmod>
->>>>>>> d68a38c789b0ae87cd264c63a0fc5bd1480621c6
+<lastmod>2021-07-30T09:32:44-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://blog.sipi.tech/my-fist-post.html</loc>
-<<<<<<< HEAD
 <lastmod>2021-07-30T09:13:00+08:00</lastmod>
-=======
-<lastmod>2021-07-29T22:30:02+08:00</lastmod>
->>>>>>> d68a38c789b0ae87cd264c63a0fc5bd1480621c6
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://blog.sipi.tech/category/misc.html</loc>
-<<<<<<< HEAD
 <lastmod>2021-07-30T09:13:00+08:06</lastmod>
-=======
-<lastmod>2021-07-29T22:30:02+08:06</lastmod>
->>>>>>> d68a38c789b0ae87cd264c63a0fc5bd1480621c6
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://blog.sipi.tech/tag/misc.html</loc>
-<<<<<<< HEAD
 <lastmod>2021-07-30T09:13:00+08:06</lastmod>
-=======
-<lastmod>2021-07-29T22:30:02+08:06</lastmod>
->>>>>>> d68a38c789b0ae87cd264c63a0fc5bd1480621c6
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://blog.sipi.tech/author/aaron-lee.html</loc>
-<<<<<<< HEAD
 <lastmod>2021-07-30T09:13:00+08:06</lastmod>
-=======
-<lastmod>2021-07-29T22:30:02+08:06</lastmod>
->>>>>>> d68a38c789b0ae87cd264c63a0fc5bd1480621c6
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
