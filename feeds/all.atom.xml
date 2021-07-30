@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
+<<<<<<< HEAD
 <feed xmlns="http://www.w3.org/2005/Atom"><title>SIPI Tech</title><link href="https://blog.sipi.tech/" rel="alternate"></link><link href="https://blog.sipi.tech/feeds/all.atom.xml" rel="self"></link><id>https://blog.sipi.tech/</id><updated>2021-07-30T09:13:00+08:00</updated><subtitle>a blog for everything about tech</subtitle><entry><title>第一篇gitpages blog</title><link href="https://blog.sipi.tech/my-fist-post.html" rel="alternate"></link><published>2021-07-30T09:13:00+08:00</published><updated>2021-07-30T09:13:00+08:00</updated><author><name>Aaron Lee</name></author><id>tag:blog.sipi.tech,2021-07-30:/my-fist-post.html</id><summary type="html">&lt;p class="first last"&gt;Short version for index and&amp;nbsp;feeds&lt;/p&gt;
+=======
+<feed xmlns="http://www.w3.org/2005/Atom"><title>SIPI Tech</title><link href="https://blog.sipi.tech/" rel="alternate"></link><link href="https://blog.sipi.tech/feeds/all.atom.xml" rel="self"></link><id>https://blog.sipi.tech/</id><updated>2021-07-29T22:30:02+08:00</updated><subtitle>a blog for everything about tech</subtitle><entry><title>第一篇gitpages blog</title><link href="https://blog.sipi.tech/my-fist-post.html" rel="alternate"></link><published>2021-07-29T22:30:02+08:00</published><updated>2021-07-29T22:30:02+08:00</updated><author><name>Aaron Lee</name></author><id>tag:blog.sipi.tech,2021-07-29:/my-fist-post.html</id><summary type="html">&lt;p class="first last"&gt;Short version for index and&amp;nbsp;feeds&lt;/p&gt;
+>>>>>>> d68a38c789b0ae87cd264c63a0fc5bd1480621c6
 </summary><content type="html">&lt;p&gt;开篇第一个文章&lt;/p&gt;
 &lt;p&gt;采用pelican写作，发布在gitpage上。&lt;/p&gt;
 &lt;div class="section" id="id1"&gt;
