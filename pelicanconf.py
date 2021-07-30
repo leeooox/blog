@@ -13,6 +13,8 @@ TIMEZONE = 'Asia/Shanghai'
 DATE_FORMATS = {'zh_cn': '%b %d, %Y'}
 DEFAULT_LANG = 'zh_cn'
 
+
+
 # Feed generation is usually not desired when developing
 FEED_ALL_ATOM = None
 CATEGORY_FEED_ATOM = None
