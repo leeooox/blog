@@ -1,0 +1,58 @@
+$date
+	Fri Jul 30 18:06:54 2021
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	100ps
+$end
+$scope module tb_adder_t1 $end
+$var wire 4 ! sum [3:0] $end
+$var wire 1 " co $end
+$var reg 4 # a [3:0] $end
+$var reg 4 $ b [3:0] $end
+$var reg 1 % ci $end
+$scope module u_adder_t1 $end
+$var wire 4 & a [3:0] $end
+$var wire 4 ' b [3:0] $end
+$var wire 1 % ci $end
+$var reg 1 " co $end
+$var reg 4 ( sum [3:0] $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+bx (
+b0 '
+b0 &
+0%
+b0 $
+b0 #
+x"
+bx !
+$end
+#120
+0"
+b0 !
+b0 (
+#150
+b1010 #
+b1010 &
+#170
+b11 $
+b11 '
+#190
+b10 #
+b10 &
+#210
+b1111 #
+b1111 &
+#240
+1%
+#270
+1"
+b11 !
+b11 (
+#360
