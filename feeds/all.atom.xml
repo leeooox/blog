@@ -1,5 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>SIPI Tech</title><link href="https://blog.sipi.tech/" rel="alternate"></link><link href="https://blog.sipi.tech/feeds/all.atom.xml" rel="self"></link><id>https://blog.sipi.tech/</id><updated>2021-07-31T16:35:54+08:00</updated><subtitle>a blog for everything about tech</subtitle><entry><title>读书笔记 - Clifford E. Cummings关于verilog delay行为模型的论文</title><link href="https://blog.sipi.tech/verilog_note_about_delay.html" rel="alternate"></link><published>2021-07-31T16:35:54+08:00</published><updated>2021-07-31T16:35:54+08:00</updated><author><name>Aaron Lee</name></author><id>tag:blog.sipi.tech,2021-07-31:/verilog_note_about_delay.html</id><summary type="html">&lt;p class="first last"&gt;读论文笔记，Clifford E. Cummings关于verilog&amp;nbsp;delay行为模型的论文&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>SIPI Tech</title><link href="https://blog.sipi.tech/" rel="alternate"></link><link href="https://blog.sipi.tech/feeds/all.atom.xml" rel="self"></link><id>https://blog.sipi.tech/</id><updated>2021-08-14T13:28:00+08:00</updated><subtitle>a blog for everything about tech</subtitle><entry><title>FPGA为什么要避免使用Latch</title><link href="https://blog.sipi.tech/avoid_latch_in_fpage.html" rel="alternate"></link><published>2021-08-14T13:28:00+08:00</published><updated>2021-08-14T13:28:00+08:00</updated><author><name>Aaron Lee</name></author><id>tag:blog.sipi.tech,2021-08-14:/avoid_latch_in_fpage.html</id><summary type="html">&lt;p class="first last"&gt;FPGA为什么要避免用latch的原因&lt;/p&gt;
+</summary><content type="html">&lt;div class="section" id="latch"&gt;
+&lt;h2&gt;1. Latch是啥&lt;/h2&gt;
+&lt;p&gt;如下图的原理示意图，latch有一个输入使能G，数据输入D和数据输出Q。Latch可以看做是一个门，如果latch使能，门打开，&amp;nbsp;数据输入能通过门到输出端。如果latch禁止使能，那么门关闭，数据输出会保持之前的值。&lt;/p&gt;
+&lt;img alt="Latch" src="images/latch.png" /&gt;
+&lt;p&gt;实现latch可以通过上面的2输入mux来完成。下面是latch的真值表。可以看出一下特点&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;输出实在G为低电平的时候处于latch锁定状态&lt;/li&gt;
+&lt;li&gt;latch不是一个时序电路，它的状态改变是由G的电平决定的，&lt;/li&gt;
+&lt;/ul&gt;
+&lt;table border="1" class="docutils"&gt;
+&lt;caption&gt;Truth Table - Gated D Latch&lt;/caption&gt;
+&lt;colgroup&gt;
+&lt;col width="33%" /&gt;
+&lt;col width="33%" /&gt;
+&lt;col width="33%" /&gt;
+&lt;/colgroup&gt;
+&lt;thead valign="bottom"&gt;
+&lt;tr&gt;&lt;th class="head"&gt;input D&lt;/th&gt;
+&lt;th class="head"&gt;Input G&lt;/th&gt;
+&lt;th class="head"&gt;Output Q&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody valign="top"&gt;
+&lt;tr&gt;&lt;td&gt;X&lt;/td&gt;
+&lt;td&gt;0&lt;/td&gt;
+&lt;td&gt;Q Previous&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;0&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;0&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id1"&gt;
+&lt;h2&gt;2. 为啥要避免latch&lt;/h2&gt;
+&lt;p&gt;latch的特性，导致它有非常危险的地方&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;G电平容易受干扰，稳定性远差于边沿触发。&lt;/li&gt;
+&lt;li&gt;G如果是由组合逻辑的输出控制，非常容易收到glitch干扰，因为组合逻辑的传输延迟特性，会导致信号抵达有先有后，导致glitch&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a class="reference external" href="https://www.nandland.com/articles/what-is-a-latch-fpga.html"&gt;https://www.nandland.com/articles/what-is-a-latch-fpga.html&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;FPGA设计一定需要知道确定的状态，如果状态不确定，就不能保证逻辑的正确的，这也就是为什么推荐用DFF而不是latch的原因。&lt;/p&gt;
+&lt;p&gt;下图是DFF的实现方法，它可以由2个latch来实现。DFF是通过边沿触发，很好的避免了glitch的产生。EDA工具的timing report可以保证
+它的setup/hold&amp;nbsp;time满足需求。&lt;/p&gt;
+&lt;img alt="DFF" src="images/dff.png" /&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id2"&gt;
+&lt;h2&gt;3. FPGA设计中为什么要避免latch&lt;/h2&gt;
+&lt;p&gt;FPGA甚至ASIC设计都要重视或者避免latch，这是为啥呢?&lt;/p&gt;
+&lt;ol class="arabic simple"&gt;
+&lt;li&gt;latch的产生往往是非设计者本来目的，设计人员的编码风格问题导致了latch的产生，很多时候也意味着逻辑设计的错误。&lt;/li&gt;
+&lt;li&gt;FPGA使用latch资源非常不合算。FPGA的tile组成一般是如下图所示的结构，CLB里面自带了LUT和DFF，DFF是CLB原生的资源。
+不管是否使用，它都在那里。如果用Latch，还是要占用一个DFF(DFF可以配置成只用其中一个Latch)。为了保证逻辑的正确性，&amp;nbsp;还需要更多的DFF来使G端口输入信号没有glitch，这样做是得不偿失的。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;img alt="CLB" src="images/clb.png" /&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id3"&gt;
+&lt;h2&gt;4. Latch产生的原因&lt;/h2&gt;
+&lt;p&gt;由于verilog设计人员的代码风格问题，没有把else或者case的default的缺省值写全，或者是reset电路没有把寄存器输出置为0，这些
+不良的编码风格，会导致综合器产生出latch。FPGA的EDA软件有可能会报出warning信息，但是在大型工程warning过多的情况下，&amp;nbsp;往往会被忽略，所以保证良好的代码风格是避免latch的根本方法。&lt;/p&gt;
+&lt;p&gt;下面是hdlbits这个网站刷verilog题用的，它有用到Quatus和modelsim编译或者仿真。其中Quatus可以报出latch问题。&amp;nbsp;直接在线使用，免费花费时间去安装EDA软件。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a class="reference external" href="https://hdlbits.01xz.net/wiki/Exams/m2014_q4a"&gt;https://hdlbits.01xz.net/wiki/Exams/m2014_q4a&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Note that this is a latch, so a Quartus warning about having inferred a latch is&amp;nbsp;expected.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;以下是latch的源码&lt;/p&gt;
+&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt; 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;module&lt;/span&gt; &lt;span class="n"&gt;top_module&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;
+  &lt;span class="k"&gt;input&lt;/span&gt; &lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+  &lt;span class="k"&gt;input&lt;/span&gt; &lt;span class="n"&gt;ena&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+  &lt;span class="k"&gt;output&lt;/span&gt; &lt;span class="n"&gt;q&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+
+  &lt;span class="k"&gt;always&lt;/span&gt; &lt;span class="p"&gt;@(&lt;/span&gt;&lt;span class="n"&gt;ena&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;begin&lt;/span&gt;
+      &lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ena&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+          &lt;span class="n"&gt;q&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;=&lt;/span&gt; &lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+&lt;span class="k"&gt;endmodule&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;p&gt;以及它的仿真输出日志，可见其对latch的描述。&lt;/p&gt;
+&lt;img alt="latch_quatus" src="images/latch_quatus.png" /&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id4"&gt;
+&lt;h2&gt;5. 总结&lt;/h2&gt;
+&lt;ol class="arabic simple"&gt;
+&lt;li&gt;无论是ASIC还是FPGA设计，都不要使用latch，除非你清楚的知道latch使用的目的&lt;/li&gt;
+&lt;li&gt;好的代码风格可以避免综合器产生latch。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+</content><category term="FPGA"></category><category term="FPGA"></category><category term="Verilog"></category></entry><entry><title>读书笔记 - Clifford E. Cummings关于verilog delay行为模型的论文</title><link href="https://blog.sipi.tech/verilog_note_about_delay.html" rel="alternate"></link><published>2021-07-31T16:35:54+08:00</published><updated>2021-07-31T16:35:54+08:00</updated><author><name>Aaron Lee</name></author><id>tag:blog.sipi.tech,2021-07-31:/verilog_note_about_delay.html</id><summary type="html">&lt;p class="first last"&gt;读论文笔记，Clifford E. Cummings关于verilog&amp;nbsp;delay行为模型的论文&lt;/p&gt;
 </summary><content type="html">&lt;p&gt;拜读大神Clifford Cummings的论文 &lt;a class="reference external" href="http://www.sunburst-design.com/papers/CummingsHDLCON1999_BehavioralDelays_Rev1_1.pdf"&gt;&amp;lt;&amp;lt;Correct Methods For Adding Delays To Verilog Behavioral Models&amp;gt;&amp;gt;&lt;/a&gt;
 这篇论文详细的说明了nonblocking和blocking，Continuous assignment，以及LHS，RHS各种组合情况下，那些delay是由缺陷的，那些是正确的。并且针对模型和test bench各做了说明。&amp;nbsp;看完之后，对delay会了解的比较清楚，有时间的建议读一读原文，就8页内容。&lt;/p&gt;
 &lt;div class="section" id="inertial-and-transport-delay"&gt;
