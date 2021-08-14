@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="zh_cn">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://blog.sipi.tech/theme/css/elegant.prod.9e9d5ce754.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="https://blog.sipi.tech/theme/css/custom.css" media="screen">
+
+        <link rel="dns-prefetch" href="//fonts.loli.net">
+        <link rel="preconnect" href="https://gstatic.loli.net/" crossorigin>
+
+        <meta name="author" content="Aaron Lee" />
+
+        <meta property="og:type" content="article" />
+        <meta name="twitter:card" content="summary">
+
+<meta name="keywords" content="FPGA, Verilog, FPGA, " />
+
+<meta property="og:title" content="FPGA为什么要避免使用Latch "/>
+<meta property="og:url" content="https://blog.sipi.tech/avoid_latch_in_fpage.html" />
+<meta property="og:description" content="FPGA为什么要避免用latch的原因" />
+<meta property="og:site_name" content="SIPI Tech" />
+<meta property="og:article:author" content="Aaron Lee" />
+<meta property="og:article:published_time" content="2021-08-14T13:28:00+08:00" />
+<meta property="og:article:modified_time" content="2021-08-14T13:28:00+08:00" />
+<meta name="twitter:title" content="FPGA为什么要避免使用Latch ">
+<meta name="twitter:description" content="FPGA为什么要避免用latch的原因">
+
+        <title>FPGA为什么要避免使用Latch  · SIPI Tech
+</title>
+        <link href="https://blog.sipi.tech/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="SIPI Tech - Full Atom Feed" />
+
+
+
+	<script src="https://cdn.bootcdn.net/ajax/libs/wavedrom/2.8.1/skins/default.js" type="text/javascript"></script>
+	<script src="https://cdn.bootcdn.net/ajax/libs/wavedrom/2.8.1/wavedrom.min.js" type="text/javascript"></script>
+    </head>
+    <body onload="WaveDrom.ProcessAll()">
+        <div id="content">
+            <div class="navbar navbar-static-top">
+                <div class="navbar-inner">
+                    <div class="container-fluid">
+                        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </a>
+                        <a class="brand" href="https://blog.sipi.tech/"><span class=site-name>SIPI Tech</span></a>
+                        <div class="nav-collapse collapse">
+                            <ul class="nav pull-right top-menu">
+                                <li >
+                                    <a href=
+                                       https://blog.sipi.tech
+                                    >Home</a>
+                                </li>
+                                <li ><a href="https://blog.sipi.tech/categories.html">Categories</a></li>
+                                <li ><a href="https://blog.sipi.tech/tags.html">Tags</a></li>
+                                <li ><a href="https://blog.sipi.tech/archives.html">Archives</a></li>
+                                <li><form class="navbar-search" action="https://blog.sipi.tech/search.html" onsubmit="return validateForm(this.elements['q'].value);"> <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input"></form></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row-fluid">
+                    <div class="span1"></div>
+                    <div class="span10">
+<article itemscope>
+<div class="row-fluid">
+    <header class="page-header span10 offset2">
+        <h1>
+            <a href="https://blog.sipi.tech/avoid_latch_in_fpage.html">
+                FPGA为什么要避免使用Latch
+            </a>
+        </h1>
+    </header>
+</div>
+
+<div class="row-fluid">
+        <div class="span8 offset2 article-content">
+            
+            <div class="section" id="latch">
+<h2>1. Latch是啥</h2>
+<p>如下图的原理示意图，latch有一个输入使能G，数据输入D和数据输出Q。Latch可以看做是一个门，如果latch使能，门打开，&nbsp;数据输入能通过门到输出端。如果latch禁止使能，那么门关闭，数据输出会保持之前的值。</p>
+<img alt="Latch" src="images/latch.png" />
+<p>实现latch可以通过上面的2输入mux来完成。下面是latch的真值表。可以看出一下特点</p>
+<ul class="simple">
+<li>输出实在G为低电平的时候处于latch锁定状态</li>
+<li>latch不是一个时序电路，它的状态改变是由G的电平决定的，</li>
+</ul>
+<table border="1" class="docutils">
+<caption>Truth Table - Gated D Latch</caption>
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">input D</th>
+<th class="head">Input G</th>
+<th class="head">Output Q</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>X</td>
+<td>0</td>
+<td>Q Previous</td>
+</tr>
+<tr><td>0</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr><td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="id1">
+<h2>2. 为啥要避免latch</h2>
+<p>latch的特性，导致它有非常危险的地方</p>
+<ul class="simple">
+<li>G电平容易受干扰，稳定性远差于边沿触发。</li>
+<li>G如果是由组合逻辑的输出控制，非常容易收到glitch干扰，因为组合逻辑的传输延迟特性，会导致信号抵达有先有后，导致glitch</li>
+</ul>
+<p><a class="reference external" href="https://www.nandland.com/articles/what-is-a-latch-fpga.html">https://www.nandland.com/articles/what-is-a-latch-fpga.html</a></p>
+<p>FPGA设计一定需要知道确定的状态，如果状态不确定，就不能保证逻辑的正确的，这也就是为什么推荐用DFF而不是latch的原因。</p>
+<p>下图是DFF的实现方法，它可以由2个latch来实现。DFF是通过边沿触发，很好的避免了glitch的产生。EDA工具的timing report可以保证
+它的setup/hold&nbsp;time满足需求。</p>
+<img alt="DFF" src="images/dff.png" />
+</div>
+<div class="section" id="id2">
+<h2>3. FPGA设计中为什么要避免latch</h2>
+<p>FPGA甚至ASIC设计都要重视或者避免latch，这是为啥呢?</p>
+<ol class="arabic simple">
+<li>latch的产生往往是非设计者本来目的，设计人员的编码风格问题导致了latch的产生，很多时候也意味着逻辑设计的错误。</li>
+<li>FPGA使用latch资源非常不合算。FPGA的tile组成一般是如下图所示的结构，CLB里面自带了LUT和DFF，DFF是CLB原生的资源。
+不管是否使用，它都在那里。如果用Latch，还是要占用一个DFF(DFF可以配置成只用其中一个Latch)。为了保证逻辑的正确性，&nbsp;还需要更多的DFF来使G端口输入信号没有glitch，这样做是得不偿失的。</li>
+</ol>
+<img alt="CLB" src="images/clb.png" />
+</div>
+<div class="section" id="id3">
+<h2>4. Latch产生的原因</h2>
+<p>由于verilog设计人员的代码风格问题，没有把else或者case的default的缺省值写全，或者是reset电路没有把寄存器输出置为0，这些
+不良的编码风格，会导致综合器产生出latch。FPGA的EDA软件有可能会报出warning信息，但是在大型工程warning过多的情况下，&nbsp;往往会被忽略，所以保证良好的代码风格是避免latch的根本方法。</p>
+<p>下面是hdlbits这个网站刷verilog题用的，它有用到Quatus和modelsim编译或者仿真。其中Quatus可以报出latch问题。&nbsp;直接在线使用，免费花费时间去安装EDA软件。</p>
+<blockquote>
+<p><a class="reference external" href="https://hdlbits.01xz.net/wiki/Exams/m2014_q4a">https://hdlbits.01xz.net/wiki/Exams/m2014_q4a</a></p>
+<p>Note that this is a latch, so a Quartus warning about having inferred a latch is&nbsp;expected.</p>
+</blockquote>
+<p>以下是latch的源码</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">module</span> <span class="n">top_module</span> <span class="p">(</span>
+  <span class="k">input</span> <span class="n">d</span><span class="p">,</span>
+  <span class="k">input</span> <span class="n">ena</span><span class="p">,</span>
+  <span class="k">output</span> <span class="n">q</span><span class="p">);</span>
+
+  <span class="k">always</span> <span class="p">@(</span><span class="n">ena</span><span class="p">)</span> <span class="k">begin</span>
+      <span class="k">if</span><span class="p">(</span><span class="n">ena</span><span class="p">)</span>
+          <span class="n">q</span> <span class="o">&lt;=</span> <span class="n">d</span><span class="p">;</span>
+  <span class="k">end</span>
+<span class="k">endmodule</span>
+</pre></div>
+</td></tr></table><p>以及它的仿真输出日志，可见其对latch的描述。</p>
+<img alt="latch_quatus" src="images/latch_quatus.png" />
+</div>
+<div class="section" id="id4">
+<h2>5. 总结</h2>
+<ol class="arabic simple">
+<li>无论是ASIC还是FPGA设计，都不要使用latch，除非你清楚的知道latch使用的目的</li>
+<li>好的代码风格可以避免综合器产生latch。</li>
+</ol>
+</div>
+
+
+
+             
+ 
+            
+            
+            
+
+
+
+
+
+
+
+<section>
+    <h6 style="display:none;">Comments</h6>
+    <p id="comment-message"> </p>
+
+    <div class="accordion" id="accordion2">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                <a class="accordion-toggle disqus-comment-count comment-count collapsed"
+                   data-toggle="collapse"
+                   data-parent="#accordion2"
+                   href="https://blog.sipi.tech/avoid_latch_in_fpage.html#comment_thread"
+                   id="comment-accordion-toggle">
+                    Comments
+                </a>
+            </div>
+            <div id="comment_thread" class="accordion-body collapse">
+                <div class="accordion-inner">
+                    <div class="comments">
+
+
+
+                        <div class="commentbox" id="avoid_latch_in_fpage"></div>
+<script src="https://unpkg.com/commentbox.io/dist/commentBox.min.js"></script>
+<script>
+    commentBox("5726956779732992-proj", {
+        onCommentCount(count) {
+            const ele = document.querySelector("#comment-accordion-toggle")
+            if (ele && count > 0) {
+                ele.innerText = `${count} Comment${count > 1 ? 's' : ''}`
+            }
+        }
+    });
+</script>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+            <hr/>
+<section>
+    <h2>Related Posts</h2>
+<ul class="related-posts-list">
+<li><a href="https://blog.sipi.tech/verilog_note_about_delay.html" title="读书笔记 - Clifford E. Cummings关于verilog delay行为模型的论文">读书笔记 - Clifford E. Cummings关于verilog delay行为模型的论文</a></li>
+</ul>
+<hr />
+</section>
+            <aside>
+            <nav>
+            <ul class="articles-timeline">
+                <li class="previous-article">« <a href="https://blog.sipi.tech/verilog_note_about_delay.html" title="Previous: 读书笔记 - Clifford E. Cummings关于verilog delay行为模型的论文">读书笔记 - Clifford E. Cummings关于verilog delay行为模型的论文</a></li>
+            </ul>
+            </nav>
+            </aside>
+        </div>
+        <section id="article-sidebar" class="span2">
+            <h4>Published</h4>
+            <time itemprop="dateCreated" datetime="2021-08-14T13:28:00+08:00">Aug 14, 2021</time>
+
+            <h4>Category</h4>
+            <a class="category-link" href="https://blog.sipi.tech/categories.html#fpga-ref">FPGA</a>
+            <h4>Tags</h4>
+            <ul class="list-of-tags tags-in-article">
+                <li><a href="https://blog.sipi.tech/tags.html#fpga-ref">FPGA
+                    <span class="superscript">2</span>
+</a></li>
+                <li><a href="https://blog.sipi.tech/tags.html#verilog-ref">Verilog
+                    <span class="superscript">2</span>
+</a></li>
+            </ul>
+<h4>Contact</h4>
+<div id="sidebar-social-link">
+</div>
+            
+
+
+
+
+
+            
+
+
+
+
+
+        </section>
+</div>
+</article>
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe.
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides.
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo https://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>                    </div>
+                    <div class="span1"></div>
+                </div>
+            </div>
+        </div>
+<footer>
+
+    <div>
+        <span class="site-name">SIPI Tech</span> - a blog for everything about tech
+    </div>
+
+
+
+    <div id="fpowered">
+        Powered by: <a href="http://getpelican.com/" title="Pelican Home Page" target="_blank" rel="nofollow noopener noreferrer">Pelican</a>
+        Theme: <a href="https://elegant.oncrashreboot.com/" title="Theme Elegant Home Page" target="_blank" rel="nofollow noopener noreferrer">Elegant</a>
+    </div>
+</footer>            <script src="//cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="//cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.0.2/js/bootstrap.min.js"></script>
+        <script src="https://blog.sipi.tech/theme/js/elegant.prod.9e9d5ce754.js"></script>
+        <script>
+            function validateForm(query)
+            {
+                return (query.length > 0);
+            }
+        </script>
+
+    <script>
+    (function () {
+        if (window.location.hash.match(/^#comment-\d+$/)) {
+            $('#comment_thread').collapse('show');
+        }
+    })();
+    window.onhashchange=function(){
+        if (window.location.hash.match(/^#comment-\d+$/))
+            window.location.reload(true);
+    }
+    $('#comment_thread').on('shown', function () {
+        var link = document.getElementById('comment-accordion-toggle');
+        var old_innerHTML = link.innerHTML;
+        $(link).fadeOut(200, function() {
+            $(this).text('Click here to hide comments').fadeIn(200);
+        });
+        $('#comment_thread').on('hidden', function () {
+            $(link).fadeOut(200, function() {
+                $(this).text(old_innerHTML).fadeIn(200);
+            });
+        })
+    })
+</script>
+
+    </body>
+    <!-- Theme: Elegant built for Pelican
+        License : MIT -->
+</html>
